@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
+        <button class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#tambahqrcodeModal"> Tambah</button>
+    </div>
+    <?= $tqcs->session->flashdata('pesan'); ?>
+    <div class="row">
+
+        <?php foreach ($qrcode as $qc) : ?>
+            <div class="col-lg-4">
+
+                <!-- Default Card Example -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold text-primary"><?= $qc['nama']; ?></h6>
+                    </div>
+                    <div class="col-sm text-center">
+                        <img src="<?= base_url('wedding-2/images/wedding/wedding-1/') . $qc['image']; ?>" class="img-thumbnail" alt="">
+                    </div>
+                    <a class="btn btn-sm btn-primary" href=" <?= base_url('admin/edit_qrcode/') . $qc['id']; ?>"><i class="fas fa-edit"></i> Edit</a>
+                    <a class="btn btn-sm btn-warning" onclick="return confirm('apakah anda yakin');" href=" <?= base_url('admin/delete_qrcode/') . $qc['id']; ?>"><i class="fas fa-edit"></i>Hapus</a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Basic Card Example -->
+    <div class="row">
+        <div class="col-lg">
+            <?php foreach ($qrcode as $qc) : ?>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"><?= $qc['judul']; ?></h6>
+                    </div>
+                    <div class="card-body">
+                        <?= $qc['paragraph']; ?>
+                    </div>
+                    <a class="btn btn-sm btn-primary" href=" <?= base_url('admin/edit_judul/') . $qc['id']; ?>"><i class="fas fa-edit"></i> Edit</a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+
+<!-- Modal tambah about -->
+<div class="modal fade" id="tambahqrcodeModal" tabindex="-1" aria-labelledby="tambahqrcodeModalLabel" aria-qcdden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tambahqrcodeModalLabel">Tambah qrcodeImage</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-qcdden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('admin/qrcode'); ?>" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Gambar qrcode">
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image">
+                        <label class="custom-file-label" for="image">Pilih Gambar</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
